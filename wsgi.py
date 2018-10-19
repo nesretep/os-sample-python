@@ -6,9 +6,9 @@ application = Flask(__name__)
 @application.route("/labels", methods = ['POST'])
 def print():
     try:
-        username = request.args['username']
-        password = request.args['password']
-        print_data = request.args['printData']
+        username = request.form['username']
+        password = request.form['password']
+        print_data = request.form['printData']
     except Exception as post_error:
         return f"ERROR:{post_error}"
 
