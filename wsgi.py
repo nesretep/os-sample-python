@@ -31,7 +31,7 @@ def print(ipaddress, port):
         return f"{len(print_data)} were written successfully."
     except Exception as post_error:
         return f"ERROR:{post_error}"
-    
+
 
 @application.route("/labels/chemical", methods = ['POST'])
 print(chem_printer)
