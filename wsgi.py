@@ -3,7 +3,7 @@ import logging
 from flask import Flask, request
 application = Flask(__name__)
 
-@application.route("/labels")
+@application.route("/labels", methods = ['POST'])
 def print():
     try:
         username = request.args['username']
