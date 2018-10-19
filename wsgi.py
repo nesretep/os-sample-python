@@ -10,7 +10,7 @@ def print():
         password = request.args['password']
         print_data = request.args['printData']
     except Exception as post_error:
-        return f"ERROR:{post_error}\n username: {username}; password: {password}; printData: {print_data}"
+        return f"ERROR:{post_error}"
 
     return f"username: {username}; password: {password}; printData: {print_data}"
 
