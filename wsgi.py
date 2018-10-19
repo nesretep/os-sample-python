@@ -23,7 +23,7 @@ def print(ipaddress, port):
         print_data = request.form['printData']
 
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return
+            return "Invalid Credentials"
 
         clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         clientsocket.connect((ipaddress, port))
