@@ -36,12 +36,12 @@ def print(ipaddress, port):
 
 @application.route("/labels/chemical", methods = ['POST'])
 def chem_printer():
-    print(chem_printer)
+    print(chem_printer, port)
 
 
 @application.route("/labels/nonchemical", methods = ['POST'])
 def nonchem_printer():
-    print(nonchem_printer)
+    print(nonchem_printer, port)
 
 
 @application.route("/labels/nonchemical/test", methods = ['POST'])
@@ -62,6 +62,7 @@ def test_print2():
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
     return data
+
 
 if __name__ == "__main__":
     application.run(debug=True)
