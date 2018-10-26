@@ -59,6 +59,7 @@ def test_print():
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
     printer(nonchem_printer, port, print_test=data)
+    return "Test print sent to non-chemical printer"
 
 
 @application.route("/labels/chemical/test", methods = ['POST'])
@@ -69,6 +70,7 @@ def test_print2():
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
     printer(chem_printer, port, print_test=data)
+    return "Test print sent to chemical printer"
 
 
 if __name__ == "__main__":
