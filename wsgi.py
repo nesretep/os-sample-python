@@ -1,4 +1,3 @@
-#! /bin/
 import socket
 
 from flask_cors import CORS
