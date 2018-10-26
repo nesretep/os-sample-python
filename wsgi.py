@@ -1,3 +1,4 @@
+#! /bin/
 import socket
 
 from flask_cors import CORS
@@ -6,11 +7,11 @@ from flask import Flask, request
 application = Flask(__name__)
 
 origin = request.host
-        allowed_domains = ['fs-dev.byu.edu',
-                           'fs-cpy.byu.edu',
-                           'fs-stg.byu.edu',
-                           'fs.byu.edu'
-                           '192.168.105.223']
+allowed_domains = ['fs-dev.byu.edu',
+                   'fs-cpy.byu.edu',
+                   'fs-stg.byu.edu',
+                   'fs.byu.edu'
+                   '192.168.105.223']
 cors = CORS(application, resources={r"/labels": {"origins": origin}})
 chem_printer = "192.168.101.18"
 nonchem_printer = '192.168.101.35'
