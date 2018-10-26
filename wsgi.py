@@ -17,14 +17,18 @@ chem_printer = "192.168.101.18"
 nonchem_printer = '192.168.101.35'
 port = 9100
 
-def print(ipaddress, port):
+
+def printer(ipaddress, port, print_test=None):
     origin = request.host
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
 
     try:
         username = request.form['username']
         password = request.form['password']
-        print_data = request.form['printData']
+        if print_test is not None:
+            print_data = print_test
+        else:
+            print_data = request.form['printData']
 
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
             return "ERROR: Invalid Credentials"
@@ -39,12 +43,12 @@ def print(ipaddress, port):
 
 @application.route("/labels/chemical", methods = ['POST'])
 def chem_printer():
-    print(chem_printer, port)
+    printer(chem_printer, port)
 
 
 @application.route("/labels/nonchemical", methods = ['POST'])
 def nonchem_printer():
-    print(nonchem_printer, port)
+    printer(nonchem_printer, port)
 
 
 @application.route("/labels/nonchemical/test", methods = ['POST'])
@@ -54,7 +58,7 @@ def test_print():
                  "\nE\n"]
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
-    return data
+    printer(nonchem_printer, port, print_test=data)
 
 
 @application.route("/labels/chemical/test", methods = ['POST'])
@@ -64,7 +68,7 @@ def test_print2():
                  "\nE\n"]
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
-    return data
+    printer(chem_printer, port, print_test=data)
 
 
 if __name__ == "__main__":
