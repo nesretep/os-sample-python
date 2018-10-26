@@ -35,11 +35,13 @@ def print(ipaddress, port):
 
 
 @application.route("/labels/chemical", methods = ['POST'])
-print(chem_printer)
+def chem_printer():
+    print(chem_printer)
 
 
 @application.route("/labels/nonchemical", methods = ['POST'])
-print(nonchem_printer)
+def nonchem_printer():
+    print(nonchem_printer)
 
 
 @application.route("/labels/nonchemical/test", methods = ['POST'])
