@@ -5,18 +5,22 @@ from flask import Flask, request
 
 application = Flask(__name__)
 
-origin = request.host
+
 allowed_domains = ['fs-dev.byu.edu',
                    'fs-cpy.byu.edu',
                    'fs-stg.byu.edu',
                    'fs.byu.edu',
                    '192.168.105.223']
-cors = CORS(application, resources={r"/labels": {"origins": origin}})
+
+
 chem_printer = "192.168.101.18"
 nonchem_printer = '192.168.101.35'
 port = 9100
 
 def print(ipaddress, port):
+    origin = request.host
+    cors = CORS(application, resources={r"/labels": {"origins": origin}})
+    
     try:
         username = request.form['username']
         password = request.form['password']
