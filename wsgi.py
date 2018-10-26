@@ -33,9 +33,9 @@ def print(ipaddress, port):
         return f"ERROR:{post_error}"
 
 
-# @application.route("/labels/chemical", methods = ['POST'])
-# def chem_printer():
-#     print(chem_printer, port)
+@application.route("/labels/chemical", methods = ['POST'])
+def chem_printer():
+    print(chem_printer, port)
 #
 #
 # @application.route("/labels/nonchemical", methods = ['POST'])
