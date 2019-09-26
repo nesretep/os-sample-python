@@ -2,6 +2,7 @@ import socket
 
 from flask_cors import CORS
 from flask import Flask, request
+import requests
 
 application = Flask(__name__)
 
@@ -18,17 +19,18 @@ nonchem_printer = '192.168.101.35'
 port = 9100
 
 
-def printer(ipaddress, port, print_test=None):
+def printer(ipaddress, port, data=None):
     origin = request.host
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
 
     try:
-        username = request.form['username']
-        password = request.form['password']
-        if print_test is not None:
-            print_data = print_test
+        # username = request.form['username']
+        # password = request.form['password']
+        if data is not None:
+            print_data = data
         else:
             print_data = request.form['printData']
+            print("print_data built")
 
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
             return "ERROR: Invalid Credentials"
@@ -58,7 +60,7 @@ def test_print():
                  "\nE\n"]
     B36ID = ["BYUC123456", "BYUC654321"]
     data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
-    printer(nonchem_printer, port, print_test=data)
+    printer(nonchem_printer, port, data=data)
     return f"Test print sent to non-chemical printer: {data}"
 
 
@@ -69,7 +71,7 @@ def test_print():
 #                  "\nE\n"]
 #     B36ID = ["BYUC123456", "BYUC654321"]
 #     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
-#     printer(chem_printer, port, print_test=data)
+#     printer(chem_printer, port, data=data)
 #     return f"Test print sent to chemical printer: {data}"
 
 
