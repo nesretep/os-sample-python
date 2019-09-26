@@ -36,14 +36,14 @@ def printer(ipaddress, port, print_test=None):
         clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         clientsocket.connect((ipaddress, port))
         bytes_sent = clientsocket.sendall(print_data)
-        return f"{len(print_data)} bytes were written successfully."
+        return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
         return f"ERROR:{post_error}"
 
 
-@application.route("/labels/chemical", methods = ['POST'])
-def chem_printer():
-    printer(chem_printer, port)
+# @application.route("/labels/chemical", methods = ['POST'])
+# def chem_printer():
+#     printer(chem_printer, port)
 
 
 @application.route("/labels/nonchemical", methods = ['POST'])
@@ -53,24 +53,24 @@ def nonchem_printer():
 
 @application.route("/labels/nonchemical/test", methods = ['POST'])
 def test_print():
-    test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
-                 "\n1921SA200000015B",
-                 "\nE\n"]
-    B36ID = ["BYUC123456", "BYUC654321"]
-    data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
-    printer(nonchem_printer, port, print_test=data)
+    # test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
+    #              "\n1921SA200000015B",
+    #              "\nE\n"]
+    # B36ID = ["BYUC123456", "BYUC654321"]
+    # data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
+    # printer(nonchem_printer, port, print_test=data)
     return f"Test print sent to non-chemical printer: {data}"
 
 
-@application.route("/labels/chemical/test", methods = ['POST'])
-def test_print2():
-    test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
-                 "\n1921SA200000015B",
-                 "\nE\n"]
-    B36ID = ["BYUC123456", "BYUC654321"]
-    data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
-    printer(chem_printer, port, print_test=data)
-    return f"Test print sent to chemical printer: {data}"
+# @application.route("/labels/chemical/test", methods = ['POST'])
+# def test_print2():
+#     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
+#                  "\n1921SA200000015B",
+#                  "\nE\n"]
+#     B36ID = ["BYUC123456", "BYUC654321"]
+#     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
+#     printer(chem_printer, port, print_test=data)
+#     return f"Test print sent to chemical printer: {data}"
 
 
 if __name__ == "__main__":
