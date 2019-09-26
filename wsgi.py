@@ -2,7 +2,6 @@ import socket
 
 from flask_cors import CORS
 from flask import Flask, request
-import requests
 
 application = Flask(__name__)
 
@@ -48,7 +47,7 @@ def nonchem_printer():
     printer(nonchem_printer, port)
 
 
-@application.route("/labels/test", methods = ['GET', 'POST'])
+@application.route("/labels/test", methods = ['POST'])
 def test_print():
     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
                  "\n1921SA200000015B",
