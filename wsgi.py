@@ -19,13 +19,13 @@ nonchem_printer = '192.168.101.35'
 port = 9100
 
 
-def printer(ipaddress, port, data=None):
+def printer(ipaddress, port, data):
     origin = request.host
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
 
     try:
-        # username = request.form['username']
-        # password = request.form['password']
+        username = request.form['username']
+        password = request.form['password']
         if data is not None:
             print_data = data
         else:
@@ -43,17 +43,12 @@ def printer(ipaddress, port, data=None):
         return f"ERROR:{post_error}"
 
 
-# @application.route("/labels/chemical", methods = ['POST'])
-# def chem_printer():
-#     printer(chem_printer, port)
-
-
-@application.route("/labels/nonchemical", methods = ['POST'])
+@application.route("/labels/", methods = ['POST'])
 def nonchem_printer():
     printer(nonchem_printer, port)
 
 
-@application.route("/labels/nonchemical/test", methods = ['GET', 'POST'])
+@application.route("/labels/test", methods = ['GET', 'POST'])
 def test_print():
     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
                  "\n1921SA200000015B",
@@ -62,17 +57,6 @@ def test_print():
     data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
     printer(nonchem_printer, port, data=data)
     return f"Test print sent to non-chemical printer: {data}"
-
-
-# @application.route("/labels/chemical/test", methods = ['POST'])
-# def test_print2():
-#     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
-#                  "\n1921SA200000015B",
-#                  "\nE\n"]
-#     B36ID = ["BYUC123456", "BYUC654321"]
-#     data = f"{test_data[0]}{B36ID[1]}{test_data[1]}{B36ID[1]}{test_data[2]}"
-#     printer(chem_printer, port, data=data)
-#     return f"Test print sent to chemical printer: {data}"
 
 
 if __name__ == "__main__":
