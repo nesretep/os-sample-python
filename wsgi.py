@@ -10,7 +10,7 @@ allowed_domains = ['fs-dev.byu.edu',
                    'fs-cpy.byu.edu',
                    'fs-stg.byu.edu',
                    'fs.byu.edu',
-                   '192.168.105.223']
+                   '192.168.105.220']
 
 
 chem_printer = "192.168.101.18"
