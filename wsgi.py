@@ -51,13 +51,14 @@ def nonchem_printer():
     printer(nonchem_printer, port)
 
 
-@application.route("/labels/nonchemical/test", methods = ['POST'])
+# @application.route("/labels/nonchemical/test", methods = ['POST'])
+@application.route("/labels/nonchemical/test")
 def test_print():
-    # test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
-    #              "\n1921SA200000015B",
-    #              "\nE\n"]
-    # B36ID = ["BYUC123456", "BYUC654321"]
-    # data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
+    test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
+                 "\n1921SA200000015B",
+                 "\nE\n"]
+    B36ID = ["BYUC123456", "BYUC654321"]
+    data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
     # printer(nonchem_printer, port, print_test=data)
     return f"Test print sent to non-chemical printer: {data}"
 
