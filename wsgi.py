@@ -31,10 +31,11 @@ def printer(ipaddress, port, test=None):
     my_data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
 
     try:
+        data = request.get_json()
         username = request.form.get("username")
         password = request.form.get("password")
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return f"ERROR: Invalid Credentials - {username}:{password} - {request.data}\n"
+            return f"ERROR: Invalid Credentials - {username}:{password} - {data}\n"
 
         if test is not None:
             print_data = my_data
