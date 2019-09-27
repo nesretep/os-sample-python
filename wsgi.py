@@ -47,7 +47,7 @@ def printer(ipaddress, port, test=None):
         bytes_sent = client_socket.sendall(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
-        return f"ERROR: {post_error} {request.data}"
+        return f"ERROR: {post_error} {data['printData']}"
 
 
 @application.route("/labels/", methods = ['POST'])
