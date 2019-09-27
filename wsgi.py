@@ -31,12 +31,12 @@ def printer(ipaddress, port, test=None):
     my_data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
 
     try:
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get("username", False)
+        password = request.form.get("password", False)
         if test is not None:
             print_data = my_data
         else:
-            print_data = request.form['printData']
+            print_data = request.form("printData", False)
             print("print_data built")
 
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
@@ -47,7 +47,7 @@ def printer(ipaddress, port, test=None):
         bytes_sent = client_socket.sendall(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
-        return f"ERROR:{post_error}"
+        return f"ERROR: {post_error}"
 
 
 @application.route("/labels/", methods = ['POST'])
