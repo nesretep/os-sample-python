@@ -43,8 +43,9 @@ def printer(ipaddress, port, test=None):
             print("print_data built")
 
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
+        client_socket.settimeout(20)
         client_socket.connect((ipaddress, port))
-        bytes_sent = client_socket.sendall(print_data)
+        bytes_sent = client_socket.send(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
         return f"ERROR: {post_error} {data['printData']}"
