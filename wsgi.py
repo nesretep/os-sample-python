@@ -35,7 +35,7 @@ def printer(ipaddress, port, test=None):
         username = request.form.get("username")
         password = request.form.get("password")
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return f"ERROR: Invalid Credentials - {username}:{password} - {data}\n"
+            return f"ERROR: Invalid Credentials - {username}:{password} - {type(data)}\n"
 
         if test is not None:
             print_data = my_data
