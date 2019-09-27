@@ -1,9 +1,11 @@
+#! /usr/bin/env python3
+
 import socket
 
 from flask_cors import CORS
 from flask import Flask, request
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 allowed_domains = ['fs-dev.byu.edu',
                    'fs-cpy.byu.edu',
@@ -18,8 +20,8 @@ port = 9100
 
 def printer(ipaddress, port, test=None):
     origin = request.host_url
-    cors = CORS(app, resources={r"/labels": {"origins": origin}})
-    app.config['CORS_HEADERS'] = 'Content-Type'
+    cors = CORS(application, resources={r"/labels": {"origins": origin}})
+    application.config['CORS_HEADERS'] = 'Content-Type'
 
     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
                  "\n1921SA200000015B",
@@ -47,19 +49,19 @@ def printer(ipaddress, port, test=None):
         return f"ERROR:{post_error}"
 
 
-@app.route("/labels/", methods = ['POST'])
+@application.route("/labels/", methods = ['POST'])
 def nonchem_printer():
     response = printer(nonchem_printer, port)
     return response
 
 
-@app.route("/labels/test", methods = ['POST'])
+@application.route("/labels/test", methods = ['POST'])
 def test_print():
     response = printer(nonchem_printer, port, test=data)
     return f"Test print sent to non-chemical printer: {data}; {response}"
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
 
 
