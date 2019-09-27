@@ -34,7 +34,7 @@ def printer(ipaddress, port, test=None):
         username = request.form.get("username")
         password = request.form.get("password")
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return f"ERROR: Invalid Credentials - {username}:{password}"
+            return f"ERROR: Invalid Credentials - {username}:{password} - {request.get_data()}\n"
 
         if test is not None:
             print_data = my_data
@@ -47,7 +47,7 @@ def printer(ipaddress, port, test=None):
         bytes_sent = client_socket.sendall(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
-        return f"ERROR: {post_error}"
+        return f"ERROR: {post_error} {request.get_data()}"
 
 
 @application.route("/labels/", methods = ['POST'])
