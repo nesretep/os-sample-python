@@ -46,7 +46,7 @@ def printer(ipaddress, port, test=None):
         client_socket = socket.socket()
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # client_socket.settimeout(20)
-        client_socket.connect((nonchem_printer, printer_port))
+        client_socket.connect((ipaddress, str(port)))
         # bytes_sent = client_socket.send(print_data)
         # return f"{bytes_sent} bytes were written successfully."
         return "done"
