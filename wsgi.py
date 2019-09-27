@@ -19,6 +19,8 @@ port = 9100
 
 
 def printer(ipaddress, port, test=None):
+    # if request.host is not in allowed_domains:
+    #     return f"{request.host} is Forbidden"
     origin = request.host_url
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
     application.config['CORS_HEADERS'] = 'Content-Type'
@@ -43,7 +45,7 @@ def printer(ipaddress, port, test=None):
 
         client_socket = socket.socket()
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.settimeout(20)
+        # client_socket.settimeout(20)
         client_socket.connect((ipaddress, port))
         # bytes_sent = client_socket.send(print_data)
         # return f"{bytes_sent} bytes were written successfully."
