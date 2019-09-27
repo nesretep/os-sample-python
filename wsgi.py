@@ -40,7 +40,7 @@ def printer(ipaddress, port, test=None):
             print("print_data built")
 
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return "ERROR: Invalid Credentials"
+            return f"ERROR: Invalid Credentials - {username}:{password}"
 
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         client_socket.connect((ipaddress, port))
