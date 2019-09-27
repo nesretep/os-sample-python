@@ -42,7 +42,7 @@ def printer(ipaddress, port, test=None):
             print_data = str(data["printData"])
 
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
-        client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # client_socket.settimeout(20)
         # client_socket.connect((ipaddress, port))
         # bytes_sent = client_socket.send(print_data)
