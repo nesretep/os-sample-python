@@ -19,6 +19,7 @@ port = 9100
 
 
 def printer(ipaddress, port, test=None):
+    print("test")
     origin = request.host_url
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
     application.config['CORS_HEADERS'] = 'Content-Type'
