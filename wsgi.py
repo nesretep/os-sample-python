@@ -31,16 +31,16 @@ def printer(ipaddress, port, test=None):
     my_data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
 
     try:
-        username = request.form.get("username", False)
-        password = request.form.get("password", False)
+        username = request.form.get("username")
+        password = request.form.get("password")
+        if username != 'lk$liC34' and password != 'M@KD(uS3oi':
+            return f"ERROR: Invalid Credentials - {username}:{password}"
+
         if test is not None:
             print_data = my_data
         else:
             print_data = request.form("printData", False)
             print("print_data built")
-
-        if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return f"ERROR: Invalid Credentials - {username}:{password}"
 
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         client_socket.connect((ipaddress, port))
