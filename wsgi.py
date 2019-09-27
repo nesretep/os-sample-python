@@ -19,7 +19,6 @@ port = 9100
 
 
 def printer(ipaddress, port, test=None):
-    print("test")
     origin = request.host_url
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
     application.config['CORS_HEADERS'] = 'Content-Type'
@@ -32,15 +31,15 @@ def printer(ipaddress, port, test=None):
 
     try:
         data = request.get_json()
-        username = request.form.get("username")
-        password = request.form.get("password")
+        username = data['username']
+        password = data["password"]
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
-            return f"ERROR: Invalid Credentials - {username}:{password} - {type(data)}\n"
+            return f"ERROR: Invalid Credentials - {username}:{password}\n"
 
         if test is not None:
             print_data = my_data
         else:
-            print_data = request.form("printData", False)
+            print_data = data["printData"]
             print("print_data built")
 
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
