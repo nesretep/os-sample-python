@@ -15,7 +15,7 @@ allowed_domains = ['fs-dev.byu.edu',
 
 chem_printer = "192.168.101.18"
 nonchem_printer = '192.168.101.35'
-port = 9100
+printer_port = 9100
 
 
 def printer(ipaddress, port, test=None):
@@ -46,7 +46,7 @@ def printer(ipaddress, port, test=None):
         client_socket = socket.socket()
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # client_socket.settimeout(20)
-        client_socket.connect((ipaddress, port))
+        client_socket.connect((nonchem_printer, printer_port))
         # bytes_sent = client_socket.send(print_data)
         # return f"{bytes_sent} bytes were written successfully."
         return "done"
@@ -58,13 +58,13 @@ def printer(ipaddress, port, test=None):
 
 @application.route("/labels/", methods = ['POST'])
 def nonchem_printer():
-    response = printer(nonchem_printer, port)
+    response = printer(nonchem_printer, printer_port)
     return response
 
 
 @application.route("/labels/test", methods = ['POST'])
 def test_print():
-    response = printer(nonchem_printer, port, test="test")
+    response = printer(nonchem_printer, printer_port, test="test")
     return f"Test print sent to non-chemical printer: {response}"
 
 
