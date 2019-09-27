@@ -36,11 +36,10 @@ def printer(ipaddress, port, test=None):
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
             return f"ERROR: Invalid Credentials - {username}:{password}\n"
 
-        if test is not None:
+        if test == "test":
             print_data = my_data
         else:
             print_data = data["printData"]
-            print("print_data built")
 
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         client_socket.settimeout(20)
@@ -48,7 +47,7 @@ def printer(ipaddress, port, test=None):
         bytes_sent = client_socket.send(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except Exception as post_error:
-        return f"ERROR: {post_error} {data['printData']}"
+        return f"ERROR: {post_error}; {print_data}\n"
 
 
 @application.route("/labels/", methods = ['POST'])
