@@ -57,7 +57,7 @@ def nonchem_printer():
 
 @application.route("/labels/test", methods = ['POST'])
 def test_print():
-    response = printer(nonchem_printer, port, test=data)
+    response = printer(nonchem_printer, port, test="test")
     return f"Test print sent to non-chemical printer: {data}; {response}"
 
 
