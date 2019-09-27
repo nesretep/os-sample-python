@@ -39,13 +39,13 @@ def printer(ipaddress, port, test=None):
         if test == "test":
             print_data = my_data
         else:
-            print_data = data["printData"]
+            print_data = str(data["printData"])
 
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM, socket.SOL_TCP)
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.settimeout(20)
         client_socket.connect((ipaddress, port))
-        bytes_sent = str(client_socket.send(print_data))
+        bytes_sent = client_socket.send(print_data)
         return f"{bytes_sent} bytes were written successfully."
     except socket.error as socket_error:
         return f"Socket Error: {socket_error}"
