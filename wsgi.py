@@ -18,12 +18,12 @@ nonchem_printer = '192.168.101.35'
 printer_port = 9100
 
 
-def printer(ipaddress, port, test=None):
+def printer(ipaddress='192.168.101.35', port=9100, test=None):
     # if request.host is not in allowed_domains:
     #     return f"{request.host} is Forbidden"
     origin = request.host_url
     cors = CORS(application, resources={r"/labels": {"origins": origin}})
-    application.config['CORS_HEADERS'] = 'Content-Type'
+    # application.config['CORS_HEADERS'] = 'Content-Type: application/json'
 
     test_data = ["\x02L\nD11\nH12\nPE\nSE\n1e9202000050010B",
                  "\n1921SA200000015B",
@@ -32,7 +32,7 @@ def printer(ipaddress, port, test=None):
     my_data = f"{test_data[0]}{B36ID[0]}{test_data[1]}{B36ID[0]}{test_data[2]}"
 
     try:
-        data = request.get_json()
+        data = request.form
         username = data['username']
         password = data["password"]
         if username != 'lk$liC34' and password != 'M@KD(uS3oi':
@@ -46,7 +46,7 @@ def printer(ipaddress, port, test=None):
         client_socket = socket.socket()
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # client_socket.settimeout(20)
-        client_socket.connect((ipaddress, str(port)))
+        client_socket.connect((ipaddress, port))
         # bytes_sent = client_socket.send(print_data)
         # return f"{bytes_sent} bytes were written successfully."
         return "done"
@@ -58,13 +58,13 @@ def printer(ipaddress, port, test=None):
 
 @application.route("/labels/", methods = ['POST'])
 def nonchem_printer():
-    response = printer(nonchem_printer, printer_port)
+    response = printer()
     return response
 
 
 @application.route("/labels/test", methods = ['POST'])
 def test_print():
-    response = printer(nonchem_printer, printer_port, test="test")
+    response = printer(test="test")
     return f"Test print sent to non-chemical printer: {response}"
 
 
