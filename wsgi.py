@@ -41,19 +41,18 @@ def printer(ipaddress='192.168.101.35', port=9100, test=None):
         if test == "test":
             print_data = my_data
         else:
-            print_data = str(data["printData"])
+            print_data = data["printData"]
 
         client_socket = socket.socket()
-        # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # client_socket.settimeout(20)
+        client_socket.settimeout(20)
         client_socket.connect((ipaddress, port))
+        # Data must be converted to bytes before being sent using socket.send()
         bytes_sent = client_socket.send(print_data.encode('ASCII'))
-        return f"{bytes_sent} bytes were written successfully."
-        # return "done"
+        return f"{bytes_sent} bytes were sent successfully."
     except socket.error as socket_error:
         return f"Socket Error: {socket_error}"
     except Exception as post_error:
-        return f"ERROR: {post_error}; {print_data}\n"
+        return f"ERROR: {post_error}"
 
 
 @application.route("/labels/", methods = ['POST'])
