@@ -47,9 +47,9 @@ def printer(ipaddress='192.168.101.35', port=9100, test=None):
         # client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # client_socket.settimeout(20)
         client_socket.connect((ipaddress, port))
-        # bytes_sent = client_socket.send(print_data)
-        # return f"{bytes_sent} bytes were written successfully."
-        return "done"
+        bytes_sent = client_socket.send(print_data)
+        return f"{bytes_sent} bytes were written successfully."
+        # return "done"
     except socket.error as socket_error:
         return f"Socket Error: {socket_error}"
     except Exception as post_error:
